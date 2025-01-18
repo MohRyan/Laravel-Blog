@@ -23,8 +23,8 @@ class AuthController extends Controller
 
     public function home()
     {
-        $post = Post::latest()->paginate(10);
-        return view('post.index', compact('post'));
+        $posts = Post::latest()->paginate(10);
+        return view('posts.index', compact('posts'));
     }
 
     public function dashboard()
@@ -40,7 +40,6 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:8|string'
         ]);
-
         User::create([
             'name' => $request->name,
             'email' => $request->email,

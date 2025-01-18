@@ -11,10 +11,10 @@ class PostController extends Controller
 {
 
     // ====================== View ======================
-    public function index()
+    public function index(Request $request)
     {
-        $post = Post::latest()->paginate(10);
-        return view('post.index', compact('post'));
+        $posts = Post::latest()->paginate(10);
+        return view('post.index', compact('posts'));
     }
 
     public function create()
