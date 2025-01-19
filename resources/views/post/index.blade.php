@@ -4,6 +4,11 @@
     <div class="container p-8 mx-auto">
         <div class="flex justify-between">
             <a href="{{ route('post.create') }}" class="px-4 py-2 text-white bg-blue-500 rounded-md">Create New Post</a>
+            <form class="flex gap-4" action="{{ route('post.index') }}">
+                <input type="text" placeholder="Search" id="search" name="search"
+                    class="px-4 py-2 border-2 rounded-md min-w-96">
+                <button type="submit" class="w-full px-4 py-2 text-white bg-blue-500 rounded-md">Search</button>
+            </form>
         </div>
         <div class="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 md:grid-cols-4">
             @if ($posts->isEmpty())

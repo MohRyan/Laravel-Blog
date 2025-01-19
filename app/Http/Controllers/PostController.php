@@ -13,7 +13,20 @@ class PostController extends Controller
     // ====================== View ======================
     public function index(Request $request)
     {
-        $posts = Post::latest()->paginate(10);
+        $search = $request->search;
+
+        $posts = Post::query()
+            ->when($search, function ($query, $search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('title', 'like', "%{$search}%")
+                        ->orWhere('content', 'like', "%{$search}%")
+                        ->orWhereHas('user', function ($query) use ($search) {
+                            $query->where('name', 'like', "%{$search}%");
+                        });
+                });
+            })
+            ->latest()
+            ->paginate(10);
         return view('post.index', compact('posts'));
     }
 

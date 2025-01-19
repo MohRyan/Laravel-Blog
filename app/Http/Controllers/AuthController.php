@@ -24,7 +24,7 @@ class AuthController extends Controller
     public function home()
     {
         $posts = Post::latest()->paginate(10);
-        return view('posts.index', compact('posts'));
+        return view('post.index', compact('posts'));
     }
 
     public function dashboard()
